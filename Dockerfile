@@ -19,11 +19,12 @@ RUN gpg --verify "${QEMU_TARBALL}.sig" "${QEMU_TARBALL}"
 
 RUN # Extract source tarball
 RUN apt-get -y install pkg-config
+RUN apt-get install xz-utils
 RUN tar xvf "${QEMU_TARBALL}"
 
 RUN # Build source
 # These seem to be the only deps actually required for a successful  build
-RUN apt-get -y install python build-essential libglib2.0-dev libpixman-1-dev ninja-build
+RUN apt-get -y install python3 build-essential libglib2.0-dev libpixman-1-dev ninja-build
 # These don't seem to be required but are specified here: https://wiki.qemu.org/Hosts/Linux
 RUN apt-get -y install libfdt-dev zlib1g-dev
 # Not required or specified anywhere but supress build warnings
